@@ -9,6 +9,7 @@ import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
+	"encoding/json"
 )
 
 // cookie handling
@@ -18,28 +19,25 @@ var cookieHandler = securecookie.New(
 	securecookie.GenerateRandomKey(32))
 
 type Profile struct {
-		username   string
-		gender string
-		age string
-	}
+    Name   string
+    Gender string
+    Age    string
+}
 
-func getUserInfo(request *http.Request) (userName string, gender string, age string) {
+
+func getUserInfo(request *http.Request) (userName string) {
 	if cookie, err := request.Cookie("session"); err == nil {
 		cookieValue := make(map[string]string)
 		if err = cookieHandler.Decode("session", cookie.Value, &cookieValue); err == nil {
 			userName = cookieValue["name"]
-			gender = cookieValue["gender"]
-			age = cookieValue["age"]
 		}
 	}
-	return userName, gender, age
+	return userName
 }
 
 func setSession(userName string, gender string, age string, response http.ResponseWriter) {
 	value := map[string]string{
 		"name": userName,
-		"gender" : gender,
-		"age" : age,
 	}
 	if encoded, err := cookieHandler.Encode("session", value); err == nil {
 		cookie := &http.Cookie{
@@ -158,18 +156,12 @@ func registerHandler(response http.ResponseWriter, request *http.Request) {
 	http.Redirect(response, request, redirectTarget, 302)
 }
 
-func profileHandler(response http.ResponseWriter, request *http.Request) {
-	username, gender, age := getUserInfo(request)
-
-	fmt.Println("response Body:")
-}
-
 func indexPageHandler(response http.ResponseWriter, request *http.Request) {
 	renderHtml(response, "index.html")
 }
 
 func calculatePageHandler(response http.ResponseWriter, request *http.Request) {
-	userName, gender, age := getUserInfo(request)
+	userName := getUserInfo(request)
 	if userName != "" {
 		renderHtml(response, "calculate.html")
 	} else { 
@@ -182,12 +174,51 @@ func registerPageHandler(response http.ResponseWriter, request *http.Request){
 }
 
 func profilePageHandler(response http.ResponseWriter, request *http.Request) {
-	userName, gender, age := getUserInfo(request)
+	userName := getUserInfo(request)
 	if userName != "" {
 		renderHtml(response, "profile.html")
 	} else { 
 		http.Redirect(response, request, "/", 302)
 	}
+}
+
+func getProfileInfo(response http.ResponseWriter, request *http.Request) {
+	db, err := sql.Open("mysql",
+		"root:root@tcp(127.0.0.1:3306)/bmi")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+	var (
+		username string
+		gender string
+		age string
+	)
+	name := getUserInfo(request)
+	
+	rows, err := db.Query("select username, gender, age from users where username = ?", name)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		err := rows.Scan(&username, &gender, &age)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+	err = rows.Err()
+	if err != nil {
+		log.Fatal(err)
+	}
+	profile := Profile{
+		Name: username,
+		Gender: gender,
+		Age: age,
+	}
+
+	json.NewEncoder(response).Encode(profile)
 }
 
 var router = mux.NewRouter()
@@ -199,9 +230,9 @@ func main() {
 	router.HandleFunc("/profile", profilePageHandler)
 
 	router.HandleFunc("/login", loginHandler).Methods("POST")
+	router.HandleFunc("/getProfileInfo", getProfileInfo).Methods("POST")
 	router.HandleFunc("/logout", logoutHandler)
 	router.HandleFunc("/register", registerHandler).Methods("POST")
-	router.HandleFunc("/userinfo", profileHandler).Methods("GET")
 	http.Handle("/", router)
 	
 
