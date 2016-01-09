@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" style = "text/css" href="../static/css/style.css">
+	<link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<title>BMI Manager</title>
+</head>
+<body>
+	<div class="basicTitle">
+		<h1>BMI MANAGER</h1>
+	</div>
+	<div id="login">
+		<form method="post" action="/login" id="loginForm">
+			<fieldset>
+				<legend>Login</legend>
+				<div class= "col-sm-12">
+				    <input type="text" name="name" placeholder="Username">
+				</div>
+				<div class= "col-sm-12 pass">
+				    <input type="password" name="password" placeholder="Password">
+				</div>
+				<div class= "col-sm-12 login">
+			   		<button type="submit">Login</button>
+			    </div>
+			</fieldset>
+		</form>			
+		<div class="col-sm-6">
+			<span>Don't Have an Account? -></span>
+		</div>
+		<div id="regButton" class="col-sm-6">
+			<a onclick="location.href = '/registration'">Register</a>
+		</div>
+	</div>
+	<script src="../static/jQuery/jquery-2.1.4.min.js"></script>
+	<script src="../static/jQuery/jqueryFormValidation.js"></script>
+	<script src="../js/index.js"></script>
+</body>
+</html>

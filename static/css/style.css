@@ -1,0 +1,180 @@
+/*Basic style*/
+body{
+	font-family: cursive !important;
+/*	background-color: #145491 !important;*/
+	background: linear-gradient(#89A9C8, #145491 80%,#89A9C8) !important;
+	background-repeat: no-repeat;
+}
+
+#login > h1{
+	text-align: center;
+}
+
+#ex1Slider .slider-selection {
+	background: #BABABA;
+}
+
+/*Login page*/
+#login, #regForm, #profile{
+   	text-align: center;
+	width: 445px;
+    margin: 100px auto;
+}
+
+.basicTitle{
+	text-align: center;
+	padding-top: 33px;
+}
+
+#login .col-sm-12 > input, #regForm .col-sm-12 > input{
+	border-radius: 6px;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.pass, .sex, .age{
+	padding-top: 14px;
+}
+
+.sex label, .sex select{
+	color: #AEA9A9;
+	font-size: 20px;
+    font-weight: normal;
+}
+
+.sex select{
+	 width: 265px;
+}
+
+#regButton a{
+    color: #3d3d3d;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 3px 8px;
+}
+
+#login form fieldset, #regForm form fieldset{
+	border: 1px solid grey !important;
+	background-color: #F2F2F2;
+}
+
+#login legend, #regForm legend, #profile legend{
+	background: #F7F7F7 !important; */
+    border: 1px solid #781351 !important; 
+    padding: 10px 0;
+}
+
+/*Calculate system page*/
+#calculateSystem{
+	padding: 60px 50px 0;
+}
+
+#calculateSystem #inputHeight:before{
+	content:"120 cm";
+	position: absolute;
+    top: 85px;
+    left: 21px;
+}
+
+#calculateSystem #inputHeight:after{
+	content:"240 cm";
+	position: absolute;
+    top: 85px;
+    right: 247px;
+}
+
+#calculateSystem .inputValue{
+	margin: 49px 0;
+}
+
+#calculateSystem #inputMass:before{
+	content:"30 kg";
+	position: absolute;
+    top: 150px;
+    left: 21px;
+}
+
+#calculateSystem #inputMass:after{
+	content:"180 kg";
+	position: absolute;
+    top: 150px;
+    right: 247px;
+}
+
+#calculateSystem #inputAge:before{
+	content:"18";
+	position: absolute;
+    top: 215px;
+    left: 21px;
+}
+
+#calculateSystem #inputAge:after{
+	content:"99";
+	position: absolute;
+    top: 215px;
+    right: 247px;
+}
+
+#calculateSystem .inputTitle{
+	margin: -3px 0 0 38px;
+    position: absolute;
+    font-weight: bold;
+    font-size: 20px;
+    border-bottom: 1px solid grey;
+}
+
+.titles{
+	background: black;
+    padding: 20px 0px;
+    color: white;
+    font-weight: bold;
+    font-size: 19px;
+    border-radius: 15px;
+    margin-bottom: 5px;
+}
+
+.calculator{
+	background-color: #e8e8e8;
+	border-radius: 15px;
+}
+
+.calculator .col-sm-4:nth-child(1){
+	padding-left: 32px;
+}
+
+#calculateBtn button, #login .login button, .regButton button, .calcBtn, .logOutBtn, .profileBtn{
+	color: white;
+	background-color: #c504c1;
+	padding: 7px 30px;
+    margin: 20px 0;
+    border-radius: 10px;
+    font-size: 22px;
+}
+
+.mMetric, .kgMetric, .ageMetric{
+	width: 50px;
+}
+
+#calculateSystem .col-sm-4 > .col-sm-12{
+	padding-top: 42px;
+	padding-left: 37px;
+    font-size: 24px;;
+}
+
+/*Profile page*/
+#profile fieldset .col-sm-6{
+	font-size: 22px;
+}
+
+#profile .col-sm-6 > div{
+	padding-top: 8px;
+}
+
+#profile legend{
+	margin: 0;
+}
+
+#profile fieldset{
+	background-color: #F2F2F2;
+}

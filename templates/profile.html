@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" style = "text/css" href="../static/css/style.css">
+	<link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<title>BMI Manager</title>
+</head>
+<body>
+	<div class="basicTitle">
+		<h1>BMI MANAGER</h1>
+	</div>
+	<button class="calcBtn" type="submit" onclick="location.href = '/calculate'">Calculator</button>
+	<button class="logOutBtn" type="submit" onclick="location.href = '/logout'">Logout</button>
+	<div id="profile" class="row">
+		<legend>My profile</legend>
+		<fieldset>
+			<div class="col-sm-6">
+				<div><label>Username:</label></div>
+				<div><label>Age:</label></div>
+				<div><label>Sex:</label></div>
+			</div>
+
+			<div class="col-sm-6">
+				<div><span>test</span></div>
+				<div><span>18</span></div>
+				<div><span>Male</span></div>
+			</div>
+		</fieldset>	
+	</div>
+
+	<script src="../static/jQuery/jquery-2.1.4.min.js"></script>
+	<script src="../static/jQuery/jqueryFormValidation.js"></script>
+	<script src="../js/profile.js"></script>
+</body>
+</html>

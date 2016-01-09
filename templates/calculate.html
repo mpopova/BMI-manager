@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" style = "text/css" href="../static/css/style.css">
+		<link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../static/slider/css/slider.css" rel="stylesheet">
+		<title>BMI Manager</title>
+	</head>
+	<script src="../static/jQuery/jquery-2.1.4.min.js"></script>
+	<script src="../static/slider/js/bootstrap-slider.js"></script>
+
+<body>
+	<div class="basicTitle">
+		<h1>BMI MANAGER</h1>
+	</div>
+	<h2>Calculator</h2>
+	<button class="profileBtn" type="submit" onclick="location.href = '/profile'">My profile</button>
+	<button class="logOutBtn"type="submit" onclick="location.href = '/logout'">Logout</button>
+
+	<div id="calculateSystem">
+		<div class="row titles">
+			<div class="col-sm-4">
+				<span>Body Mass Index - Calculator</span>
+			</div>
+			<div class="col-sm-4">
+				<span>Metric System</span>
+			</div>
+			<div class="col-sm-4">
+				<span>Result - Health risk classification</span>
+			</div>
+		</div>
+
+		<div class="row calculator">
+			<div class="col-sm-4">
+				<div id="inputHeight" class="inputValue">
+					<input type="text" class="slider1" data-slider-min="120" data-slider-max="240" data-slider-step="1" data-slider-orientation="horizontal" data-slider-selection="after"
+					data-slider-tooltip="show">
+					<span class="inputTitle">Height</span>
+				</div>
+				<div id="inputMass" class="inputValue">
+					<input type="text" class="slider2" data-slider-min="30" data-slider-max="180" data-slider-step="1" data-slider-orientation="horizontal" data-slider-selection="after"
+					data-slider-tooltip="show">
+					<span class="inputTitle">Mass</span>
+				</div>
+				<div id="inputAge" class="inputValue">
+					<input type="text" class="slider3" data-slider-min="18" data-slider-max="99" data-slider-step="1" data-slider-orientation="horizontal" data-slider-selection="after"
+					data-slider-tooltip="show">
+					<span class="inputTitle">Age</span>
+				</div>
+				<div>
+					<span><img src="../static/images/gender-male.png"></span>
+					<input type="radio" name="sex" value="male"/>
+
+					<span><img src="../static/images/gender-female.png"></span>
+					<input type="radio" name="sex" value="female"/>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="col-sm-12">
+					<input type="text" class="mMetric" readonly>
+					<span>m.</span>
+				</div>
+				<div class="col-sm-12">
+					<input type="text" class="kgMetric" readonly>
+					<span>kg.</span>
+				</div>
+				<div class="col-sm-12">
+					<input type="text" class="ageMetric" readonly>
+					<span>years</span>
+				</div>
+				<div class="col-sm-12">
+					<span>The selected gender is: </span>
+				</div>
+				<div class="col-sm-12">
+					<span>female</span>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="col-sm-12">
+					<label>Health Risk</label>
+					<div><span>visok</span></div>
+				</div>
+				<div class="col-sm-12">
+					<label>Body Fat %</label>
+					<div><span>50%</span></div>
+				</div>
+				<div class="col-sm-12">
+					<label>Ideal Weight</label>
+					<div><span>50kg</span></div>
+				</div>
+				<div class="col-sm-12">
+					<label>Body Mass Index</label>
+					<div><span>50</span></div>
+				</div>
+			</div>	
+		</div>
+	</div>
+
+	<div id="calculateBtn" class="row">
+		<div class="col-sm-12 col-sm-offset-10">
+			 <button type="submit">Calculate</button>
+		</div>
+		<span class="glyphicons glyphicons-gender-female"></span>
+	</div>   
+</body>
+	<script>
+		var mySlider1 = $("input.slider1").slider('setValue', 5);
+		console.log(mySlider1.slider('getValue'));
+
+		var mySlider2 = $("input.slider2").slider('setValue', 5);
+		console.log(mySlider2.slider('getValue'));
+
+		var mySlider3 = $("input.slider3").slider('setValue', 5);
+		console.log(mySlider3.slider('getValue'));
+		    // mySlider.slider();
+	</script>
+</html>

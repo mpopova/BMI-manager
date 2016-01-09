@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" style = "text/css" href="../static/css/style.css">
+	<link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<title>BMI Manager</title>
+</head>
+<body>
+	<div class="basicTitle">
+		<h1>BMI MANAGER</h1>
+	</div>
+	<div id="regForm">
+		<form method="post" action="/register" if="registrationForm">
+			<fieldset>
+				<legend>Registration</legend>
+				<div class="col-sm-12">
+					<input type="text" name="name" placeholder="Username">
+				</div>
+			    <div class="col-sm-12 pass">
+			      <input type="password" name="password" placeholder="Password">	
+			    </div>
+			  	<div class="col-sm-12 sex">
+				    <label for="sex">Sex</label>
+				    <select name="gender">
+				    	<option value="M">Male</option>
+				        <option value="F">Female</option>
+				    </select>  		
+			  	</div>
+				<div class="col-sm-12 age">
+					 <input type="text" id="age" name="age" placeholder="Age">
+				</div>
+			    <div class="col-sm-12 regButton">
+			    	<button type="submit">Register</button>
+			    </div>
+			</fieldset>
+		</form>
+	</div>
+    </script>
+</body>
+</html>
