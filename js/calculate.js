@@ -16,4 +16,20 @@ $(document).ready(function () {
     $('input:radio').click(function() {
         $("#genRef").text($(this).val());
     });
+
+    $('#calculateBtn button').click(function(){
+        debugger
+        $.ajax(
+            {
+                type: "POST",
+                url: "/calculateBMI",
+                data: { 
+                    BMI: 'testtest',
+                    HealthRisk: 'testtesttest'
+                },
+                success:function(result){
+                    var json = jQuery.parseJSON(result);
+                    console.log(json);
+                }});
+    })
 });

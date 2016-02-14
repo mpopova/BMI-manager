@@ -10,6 +10,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"encoding/json"
+	// "math"
 )
 
 // cookie handling
@@ -182,6 +183,15 @@ func profilePageHandler(response http.ResponseWriter, request *http.Request) {
 	}
 }
 
+func statisticsPageHandler(response http.ResponseWriter, request *http.Request) {
+	userName := getUserInfo(request)
+	if userName != "" {
+		renderHtml(response, "statistics.html")
+	} else { 
+		http.Redirect(response, request, "/", 302)
+	}
+}
+
 func getProfileInfo(response http.ResponseWriter, request *http.Request) {
 	db, err := sql.Open("mysql",
 		"root:root@tcp(127.0.0.1:3306)/bmi")
@@ -221,6 +231,24 @@ func getProfileInfo(response http.ResponseWriter, request *http.Request) {
 	json.NewEncoder(response).Encode(profile)
 }
 
+type BmiProfile struct {
+  BMI string
+  HealthRisk string
+
+}
+
+func calculateBMI(response http.ResponseWriter, request *http.Request){
+	decoder := json.NewDecoder(request.Body)
+	var bmiProfile BmiProfile
+
+	err := decoder.Decode(&bmiProfile)
+	if err != nil {
+		panic(err)
+	}
+
+  	json.NewEncoder(response).Encode(bmiProfile)
+}
+
 var router = mux.NewRouter()
 
 func main() {
@@ -228,11 +256,13 @@ func main() {
 	router.HandleFunc("/calculate", calculatePageHandler)
 	router.HandleFunc("/registration", registerPageHandler)
 	router.HandleFunc("/profile", profilePageHandler)
+	router.HandleFunc("/statistics", statisticsPageHandler)
 
 	router.HandleFunc("/login", loginHandler).Methods("POST")
 	router.HandleFunc("/getProfileInfo", getProfileInfo).Methods("POST")
 	router.HandleFunc("/logout", logoutHandler)
 	router.HandleFunc("/register", registerHandler).Methods("POST")
+	router.HandleFunc("/calculateBMI", calculateBMI).Methods("POST")
 	http.Handle("/", router)
 	
 

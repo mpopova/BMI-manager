@@ -143,13 +143,18 @@ body{
 	padding-left: 32px;
 }
 
-#calculateBtn button, #login .login button, .regButton button, .calcBtn, .logOutBtn, .profileBtn{
+#calculateBtn button, #login .login button, .regButton button, .calcBtn, .logOutBtn, .profileBtn,.statisticBtn{
 	color: white;
 	background-color: #c504c1;
 	padding: 7px 30px;
     margin: 20px 0;
     border-radius: 10px;
     font-size: 22px;
+}
+
+.logOutBtn{
+	float: right;
+	margin-right: 10px;
 }
 
 .mMetric, .kgMetric, .ageMetric{
