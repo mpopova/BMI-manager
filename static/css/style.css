@@ -4,6 +4,7 @@ body{
 /*	background-color: #145491 !important;*/
 	background: linear-gradient(#89A9C8, #145491 80%,#89A9C8) !important;
 	background-repeat: no-repeat;
+	overflow-x: hidden;
 }
 
 #login > h1{
