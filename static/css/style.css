@@ -74,33 +74,33 @@ body{
 #calculateSystem #inputHeight:before{
 	content:"120 cm";
 	position: absolute;
-    top: 85px;
-    left: 21px;
+    top: 106px;
+    left: 24px;
 }
 
 #calculateSystem #inputHeight:after{
 	content:"240 cm";
 	position: absolute;
-    top: 85px;
-    right: 247px;
+    top: 106px;
+    right: 191px;
 }
 
 #calculateSystem .inputValue{
-	margin: 49px 0;
+	margin: 80px 0;
 }
 
 #calculateSystem #inputMass:before{
 	content:"30 kg";
 	position: absolute;
-    top: 150px;
-    left: 21px;
+    top: 207px;
+    left: 24px;
 }
 
 #calculateSystem #inputMass:after{
 	content:"180 kg";
 	position: absolute;
-    top: 150px;
-    right: 247px;
+    top: 207px;
+    right: 195px;
 }
 
 #calculateSystem #inputAge:before{
@@ -163,7 +163,7 @@ body{
 }
 
 #calculateSystem .col-sm-4 > .col-sm-12{
-	padding-top: 42px;
+	padding-top: 69px;
 	padding-left: 37px;
     font-size: 24px;;
 }

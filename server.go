@@ -10,6 +10,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"encoding/json"
+	"time"
 	// "math"
 )
 
@@ -231,22 +232,38 @@ func getProfileInfo(response http.ResponseWriter, request *http.Request) {
 	json.NewEncoder(response).Encode(profile)
 }
 
-type BmiProfile struct {
-  BMI string
-  HealthRisk string
-
-}
-
 func calculateBMI(response http.ResponseWriter, request *http.Request){
-	decoder := json.NewDecoder(request.Body)
-	var bmiProfile BmiProfile
+	bmiStr := request.PostFormValue("BMI")
+	userName := getUserInfo(request)
+	current_time := time.Now().Local()
 
-	err := decoder.Decode(&bmiProfile)
+
+	db, err := sql.Open("mysql",
+		"root:root@tcp(127.0.0.1:3306)/bmi")
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	stmt, err := db.Prepare("INSERT INTO bmihistory(UserName, Date, BMI) VALUES(?,?,?)")
+	if err != nil {
+		log.Fatal(err)
+	}
+	res, err := stmt.Exec(userName, current_time.Format("2006-01-02"), bmiStr)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-  	json.NewEncoder(response).Encode(bmiProfile)
+	rowCnt, err := res.RowsAffected()
+	if err != nil {
+		log.Fatal(err)
+	}
+	redirectTarget := "/calculate"
+	if rowCnt == 0 {
+		redirectTarget = "/calculate"
+	}
+
+	http.Redirect(response, request, redirectTarget, 302)
 }
 
 var router = mux.NewRouter()
