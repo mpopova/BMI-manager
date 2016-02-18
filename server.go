@@ -15,7 +15,6 @@ import (
 )
 
 // cookie handling
-
 var cookieHandler = securecookie.New(
 	securecookie.GenerateRandomKey(64),
 	securecookie.GenerateRandomKey(32))
@@ -26,6 +25,10 @@ type Profile struct {
     Age    string
 }
 
+type BMIStat struct {
+    Date   []string
+    BMI []string
+}
 
 func getUserInfo(request *http.Request) (userName string) {
 	if cookie, err := request.Cookie("session"); err == nil {
@@ -232,6 +235,48 @@ func getProfileInfo(response http.ResponseWriter, request *http.Request) {
 	json.NewEncoder(response).Encode(profile)
 }
 
+func getPersonalStat(response http.ResponseWriter, request *http.Request) {
+	db, err := sql.Open("mysql",
+		"root:root@tcp(127.0.0.1:3306)/bmi")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	var (
+		resDate []string
+		resBMI []string
+		Date string
+		BMI string
+	)
+	name := getUserInfo(request)
+	
+	rows, err := db.Query("select Date, BMI from bmihist where UserName = ? ORDER BY Date", name)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		err := rows.Scan(&Date, &BMI)
+		if err != nil {
+			log.Fatal(err)
+		}
+		resDate = append(resDate, Date)
+		resBMI = append(resBMI, BMI)
+	}
+	err = rows.Err()
+	if err != nil {
+		log.Fatal(err)
+	}
+	bmiStat := BMIStat{
+		Date: resDate,
+		BMI: resBMI,
+	}
+
+	json.NewEncoder(response).Encode(bmiStat)
+}
+
 func calculateBMI(response http.ResponseWriter, request *http.Request){
 	bmiStr := request.PostFormValue("BMI")
 	userName := getUserInfo(request)
@@ -245,7 +290,7 @@ func calculateBMI(response http.ResponseWriter, request *http.Request){
 	}
 	defer db.Close()
 
-	stmt, err := db.Prepare("INSERT INTO bmihistory(UserName, Date, BMI) VALUES(?,?,?)")
+	stmt, err := db.Prepare("INSERT INTO bmihist(UserName, Date, BMI) VALUES(?,?,?)")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -277,6 +322,7 @@ func main() {
 
 	router.HandleFunc("/login", loginHandler).Methods("POST")
 	router.HandleFunc("/getProfileInfo", getProfileInfo).Methods("POST")
+	router.HandleFunc("/getPersonalStat", getPersonalStat).Methods("POST")
 	router.HandleFunc("/logout", logoutHandler)
 	router.HandleFunc("/register", registerHandler).Methods("POST")
 	router.HandleFunc("/calculateBMI", calculateBMI).Methods("POST")

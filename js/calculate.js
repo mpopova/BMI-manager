@@ -8,7 +8,7 @@ $(document).ready(function () {
         $(".mMetric").val(me.value);
         document.mMetric = me.value/100;
         var bmiIndex = document.kgMetric/(document.mMetric*document.mMetric);
-        $(".bmi").text(bmiIndex);
+        $(".bmi").text(parseFloat(bmiIndex).toFixed(2));
         if(bmiIndex<18.5){
             $(".risk").text("Underweight");
         }
@@ -27,7 +27,7 @@ $(document).ready(function () {
         $(".kgMetric").val(me.value);
         document.kgMetric = me.value;
         var bmiIndex = document.kgMetric/(document.mMetric*document.mMetric);
-        $(".bmi").text(bmiIndex);
+        $(".bmi").text(parseFloat(bmiIndex).toFixed(2));
         if(bmiIndex<18.5){
             $(".risk").text("Underweight");
         }
@@ -50,5 +50,5 @@ $(document).ready(function () {
             success:function(result){
             }
         });    
-    })
+    });
 });

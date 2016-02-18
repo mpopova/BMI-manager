@@ -158,6 +158,15 @@ body{
 	margin-right: 10px;
 }
 
+.ownBtn, .allBtn{
+	color: white;
+	background-color: #c504c1;
+	padding: 20px 75px;
+    margin: 20px 0;
+    border-radius: 10px;
+    font-size: 22px;
+}
+
 .mMetric, .kgMetric, .ageMetric{
 	width: 50px;
 }
