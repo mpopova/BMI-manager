@@ -11,7 +11,6 @@ import (
 	"log"
 	"encoding/json"
 	"time"
-	// "math"
 )
 
 // cookie handling

@@ -28,27 +28,32 @@ $(document).ready(function () {
         document.kgMetric = me.value;
         var bmiIndex = document.kgMetric/(document.mMetric*document.mMetric);
         $(".bmi").text(parseFloat(bmiIndex).toFixed(2));
-        if(bmiIndex<18.5){
+        if(bmiIndex < 18.5){
             $(".risk").text("Underweight");
         }
-        if(bmiIndex>18.5 && bmiIndex<25){
+        if(bmiIndex > 18.5 && bmiIndex < 25){
             $(".risk").text("Normal weight");
         }
-        if(bmiIndex>25){
+        if(bmiIndex > 25){
             $(".risk").text("Overweight");
         }
     });
 
     $('#calculateBtn button').click(function(){
         var bmiIndex = document.kgMetric/(document.mMetric*document.mMetric);
-        $.ajax({
-            type: "POST",
-            url: "/calculateBMI",
-            data: { 
-                BMI: bmiIndex
-            },
-            success:function(result){
-            }
-        });    
+        if(bmiIndex && bmiIndex > 0){
+            $.ajax({
+                type: "POST",
+                url: "/calculateBMI",
+                data: { 
+                    BMI: bmiIndex
+                },
+                success:function(result){
+                }
+            }); 
+        }
+        else{
+            alert('You must insert kilos and height!');
+        }
     });
 });
