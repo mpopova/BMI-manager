@@ -32,7 +32,7 @@ BMI manager е уеб-приложение, разработващо се на �
 
 1.Клонирате repository-то https://github.com/mpopova/BMI-manager.git .
 
-2.Сваляте използваните пакети с go get. Това са: "fmt", "html/template", "github.com/gorilla/mux", "github.com/gorilla/securecookie", "net/http", "database/sql", "github.com/go-sql-driver/mysql", "log".
+2.Сваляте използваните пакети с go get. Това са: "github.com/gorilla/mux", "github.com/gorilla/securecookie", "github.com/go-sql-driver/mysql".
 
 3.Инсталирате XAMPP Control Panel и стартирате модулите Apache и MySQL.
 
@@ -42,14 +42,60 @@ BMI manager е уеб-приложение, разработващо се на �
 
 6.Достъпвате application-а на http://localhost:8080/ .
 
+Структура на проекта:
+
+.
+
+├── js                      #поведението на всички страници
+
+│   ├── calculate.js        # управлява поведението на страницата с калкулатора
+
+│   ├── index.js            # управлява поведението на началната страница (вход)
+
+│   ├── profile.js          # управлява поведението на страницата с профила
+
+│   └── statistics.js       # управлява поведението на страницата със статистиките
+
+├── static
+
+│   ├── bootstrap           #библиотека за responsive design
+
+│   ├── charts              #библиотека за чертаене на графики
+
+│   ├── css                 #папката съдържа css файл, определящ визията на елементите
+
+│   ├── jQuery              # jQuery библиотека
+
+│   └── slider              # slider - управлява слайдерите при въвеждане на тегло и височина
+
+├── templates               #html страниците
+
+│   ├── calculate.html      #страницата с калкулатора
+
+│   ├── charts.html         #графики
+
+│   ├── index.html          #началната страница (вход)
+
+│   ├── profile.html        #страницата "Моят профил"
+
+│   ├── register.html       #страницата с регистрация
+
+│   └── statistics.html     #страница със статистиките
+
+LICENSE                     #лиценз файл
+
+README                      #README файл 
+
+server.go                   #цялата back-end логика
+
 
 Лиценз:
 
 MIT License - open source license.
 
+//English
 BMI manager is web-application, written in Go.
 
-//English
 Functional requirements:
 
 1.Registration
@@ -69,7 +115,7 @@ Installation instructions:
 
 1.Clone the repository https://github.com/mpopova/BMI-manager.git .
 
-2.Download used packages with the command "go get". Тhey are: "fmt", "html/template", "github.com/gorilla/mux", "github.com/gorilla/securecookie", "net/http", "database/sql", "github.com/go-sql-driver/mysql", "log".
+2.Download used packages with the command "go get". Тhey are: "github.com/gorilla/mux", "github.com/gorilla/securecookie", "github.com/go-sql-driver/mysql".
 
 3.Install XAMPP Control Panel and start Apache and MySQL modules.
 
