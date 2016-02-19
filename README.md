@@ -4,7 +4,7 @@ This is my project for the course "Programming with GO" in FMI. BMI manager - we
 
 BMI manager е уеб-приложение, разработващо се на езика Gо.
 
-Фукнционалности:
+#Функционалности:
 
 1.Регистрация в системата
 
@@ -28,7 +28,7 @@ BMI manager е уеб-приложение, разработващо се на �
 
 Приложението е изцяло responsivness.
 
-Инсталация:
+#Инсталация:
 
 1.Клонирате repository-то https://github.com/mpopova/BMI-manager.git .
 
@@ -42,7 +42,7 @@ BMI manager е уеб-приложение, разработващо се на �
 
 6.Достъпвате application-а на http://localhost:8080/ .
 
-Структура на проекта:
+#Структура на проекта:
 
 .
 
@@ -96,14 +96,14 @@ README                      #README файл
 server.go                   #цялата back-end логика
 
 
-Лиценз:
+#Лиценз:
 
 MIT License - open source license.
 
 //English
 BMI manager is web-application, written in Go.
 
-Functional requirements:
+#Functional requirements:
 
 1.Registration
 
@@ -118,7 +118,7 @@ The application calculate BMI of the user and show graphic after kilos and heigh
 5.The system support page with average statistic - how is average BMI of males and females and show graphic for it.
 
 
-Installation instructions:
+#Installation instructions:
 
 1.Clone the repository https://github.com/mpopova/BMI-manager.git .
 
@@ -135,7 +135,7 @@ server
 6.Now, you can access the application here ->  http://localhost:8080/ .
 
 
-Licence:
+#License:
 
 MIT License - open source license.
 
