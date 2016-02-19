@@ -70,7 +70,7 @@ go build server.go
 5.run:
 server
 
-6.Now, you can access the application-а here ->  http://localhost:8080/ .
+6.Now, you can access the application here ->  http://localhost:8080/ .
 
 
 Licence:
