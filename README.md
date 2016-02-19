@@ -32,7 +32,7 @@ BMI manager е уеб-приложение, разработващо се на �
 
 1.Клонирате repository-то https://github.com/mpopova/BMI-manager.git .
 
-2.Сваляте използваните пакети с go get. Това са: "fmt", "html/template", "github.com/gorilla/mux", "github.com/gorilla/securecookie", "net/http", "database/sql", "github.com/go-sql-driver/mysql", "log".
+2.Сваляте използваните пакети с go get. Това са: "github.com/gorilla/mux", "github.com/gorilla/securecookie", "github.com/go-sql-driver/mysql".
 
 3.Инсталирате XAMPP Control Panel и стартирате модулите Apache и MySQL.
 
@@ -69,7 +69,7 @@ Installation instructions:
 
 1.Clone the repository https://github.com/mpopova/BMI-manager.git .
 
-2.Download used packages with the command "go get". Тhey are: "fmt", "html/template", "github.com/gorilla/mux", "github.com/gorilla/securecookie", "net/http", "database/sql", "github.com/go-sql-driver/mysql", "log".
+2.Download used packages with the command "go get". Тhey are: "github.com/gorilla/mux", "github.com/gorilla/securecookie", "github.com/go-sql-driver/mysql".
 
 3.Install XAMPP Control Panel and start Apache and MySQL modules.
 
