@@ -21,9 +21,19 @@ $(document).ready(function () {
     $('.ownBtn').click(function(){
         var dataPoints = [];
         var bmiStats = window.personalBMI;
+        var j = 0;
+        
+        if(!bmiStats.BMI){
+            alert('No personal statistics, please first save your BMI !');
+            return;
+        }
         
         for(i = 0; i < bmiStats.BMI.length; i++){
-            dataPoints[i] = {x: new Date(bmiStats.Date[i]), y: parseInt(bmiStats.BMI[i])};
+            if(bmiStats.Date[i] && bmiStats.Date[i]==bmiStats.Date[i+1]){
+                j++;
+                continue;
+            }
+            dataPoints[i-j] = {x: new Date(bmiStats.Date[i]), y: parseInt(bmiStats.BMI[i])};
         }
 
         var chart = new CanvasJS.Chart("chartContainer",{
