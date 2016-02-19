@@ -30,6 +30,11 @@ type BMIStat struct {
     BMI []string
 }
 
+type BMIAvg struct {
+    BMI_Males   []string
+    BMI_Females []string
+}
+
 func getUserInfo(request *http.Request) (userName string) {
 	if cookie, err := request.Cookie("session"); err == nil {
 		cookieValue := make(map[string]string)
@@ -235,6 +240,47 @@ func getProfileInfo(response http.ResponseWriter, request *http.Request) {
 	json.NewEncoder(response).Encode(profile)
 }
 
+func getAverageBMI(response http.ResponseWriter, request *http.Request) {
+	db, err := sql.Open("mysql",
+		"root:root@tcp(127.0.0.1:3306)/bmi")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+
+	var (
+		resBMI_Males []string
+		resBMI_Females []string
+		BMI_Males string
+		BMI_Females string
+	)
+	
+	rows, err := db.Query("SELECT AVG(bh.`BMI`) AS BMI_Males, AVG(bh2.`BMI`) AS BMI_Females FROM `users` usr LEFT JOIN `bmihist` bh ON usr.`username` = bh.`UserName` AND usr.`gender` = 'M' LEFT JOIN `bmihist` bh2 ON usr.`username` = bh2.`UserName` AND usr.`gender` = 'F'")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		err := rows.Scan(&BMI_Males, &BMI_Females)
+		if err != nil {
+			log.Fatal(err)
+		}
+		resBMI_Males = append(resBMI_Males, BMI_Males)
+		resBMI_Females = append(resBMI_Females, BMI_Females)
+	}
+	err = rows.Err()
+	if err != nil {
+		log.Fatal(err)
+	}
+	bmiAvg := BMIAvg{
+		BMI_Males: resBMI_Males,
+		BMI_Females: resBMI_Females,
+	}
+
+	json.NewEncoder(response).Encode(bmiAvg)
+}
+
 func getPersonalStat(response http.ResponseWriter, request *http.Request) {
 	db, err := sql.Open("mysql",
 		"root:root@tcp(127.0.0.1:3306)/bmi")
@@ -323,6 +369,7 @@ func main() {
 	router.HandleFunc("/login", loginHandler).Methods("POST")
 	router.HandleFunc("/getProfileInfo", getProfileInfo).Methods("POST")
 	router.HandleFunc("/getPersonalStat", getPersonalStat).Methods("POST")
+	router.HandleFunc("/getAverageBMI", getAverageBMI).Methods("POST")
 	router.HandleFunc("/logout", logoutHandler)
 	router.HandleFunc("/register", registerHandler).Methods("POST")
 	router.HandleFunc("/calculateBMI", calculateBMI).Methods("POST")

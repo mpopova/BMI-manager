@@ -8,9 +8,19 @@ $(document).ready(function () {
             window.personalBMI = json;
         }
     });
+
+    $.post("/getAverageBMI",
+    function(data, status){
+        if(status == 'success'){
+            var json = jQuery.parseJSON(data);
+
+            window.BMIAvg = json;
+        }
+    });
+
     $('.ownBtn').click(function(){
         var dataPoints = [];
-        var bmiStats = window.personalBMI
+        var bmiStats = window.personalBMI;
         
         for(i = 0; i < bmiStats.BMI.length; i++){
             dataPoints[i] = {x: new Date(bmiStats.Date[i]), y: parseInt(bmiStats.BMI[i])};
@@ -34,6 +44,32 @@ $(document).ready(function () {
             }]
         });
 
+    chart.render();
+    });
+    $('.allBtn').click(function(){
+        var BMI_Males = window.BMIAvg.BMI_Males[0],
+            BMI_Females = window.BMIAvg.BMI_Females[0];
+        var chart = new CanvasJS.Chart("chartContainer", {
+        title:{
+            text: "Male/Female Average BMI"              
+        },
+        axisX:{
+                title: "Gender",
+                gridThickness: 2
+            },
+            axisY: {
+                title: "BMI"
+            },
+        data: [              
+        {
+            type: "column",
+            dataPoints: [
+                { label: "Male",  y: parseInt(BMI_Males)  },
+                { label: "Female", y: parseInt(BMI_Females)   }
+            ]
+        }
+        ]
+    });
     chart.render();
     });
 });
