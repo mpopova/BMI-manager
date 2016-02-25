@@ -34,7 +34,7 @@ BMI manager е уеб-приложение, разработващо се на �
 
 2.Сваляте използваните пакети с go get. Това са: "github.com/gorilla/mux", "github.com/gorilla/securecookie", "github.com/go-sql-driver/mysql".
 
-3.Инсталирате XAMPP Control Panel и стартирате модулите Apache и MySQL.
+3.Инсталирате XAMPP Control Panel и стартирате модулите Apache и MySQL. Създавате база данни bmi. Изпълняване script-овете от папка scriptsDB.
 
 4.От конзолата влизате в папката, където сте клонирали проекта и изпълнявате go build server.go
 
@@ -95,6 +95,8 @@ README                      #README файл
 
 server.go                   #цялата back-end логика
 
+server_test.go              #всички тестове
+
 
 #Лиценз:
 
@@ -124,7 +126,7 @@ The application calculate BMI of the user and show graphic after kilos and heigh
 
 2.Download used packages with the command "go get". Тhey are: "github.com/gorilla/mux", "github.com/gorilla/securecookie", "github.com/go-sql-driver/mysql".
 
-3.Install XAMPP Control Panel and start Apache and MySQL modules.
+3.Install XAMPP Control Panel and start Apache and MySQL modules. Create data base bmi. Import scripts from the folder scriptsDB.
 
 4.From cmd we can stay on the folder with the cloned project and run the following:
 go build server.go
