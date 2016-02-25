@@ -22,9 +22,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-`id` int(255) NOT NULL,
+  `id` int(255) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `gender` varchar(1) NOT NULL,
   `age` int(100) NOT NULL
-) 
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
