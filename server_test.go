@@ -15,43 +15,43 @@ import (
 var (
 	server   *httptest.Server
 	reader   io.Reader
-    userName string
+    	userName string
 	loginUrl string
-    registerUrl string
-    getProfileInfoUrl string
-    getPersonalStatUrl string
-    getAverageBMIUrl string
-    calculateBMIUrl string
+    	registerUrl string
+	getProfileInfoUrl string
+	getPersonalStatUrl string
+    	getAverageBMIUrl string
+    	calculateBMIUrl string
 )
 
 func init() {
 	// log.Println(fmt.Sprintf("%s", "INIT"))
 	router.HandleFunc("/login", loginHandler).Methods("POST")
-    router.HandleFunc("/register", registerHandler).Methods("POST")
-    router.HandleFunc("/getProfileInfo", getProfileInfo).Methods("POST")
-    router.HandleFunc("/getPersonalStat", getPersonalStat).Methods("POST")
-    router.HandleFunc("/getAverageBMI", getAverageBMI).Methods("POST")
-    router.HandleFunc("/calculateBMI", calculateBMI).Methods("POST")
+	router.HandleFunc("/register", registerHandler).Methods("POST")
+	router.HandleFunc("/getProfileInfo", getProfileInfo).Methods("POST")
+	router.HandleFunc("/getPersonalStat", getPersonalStat).Methods("POST")
+	router.HandleFunc("/getAverageBMI", getAverageBMI).Methods("POST")
+	router.HandleFunc("/calculateBMI", calculateBMI).Methods("POST")
 
 	server = httptest.NewServer(router)
 	loginUrl = fmt.Sprintf("%s/login", server.URL)
-    registerUrl = fmt.Sprintf("%s/register", server.URL)
-    getProfileInfoUrl = fmt.Sprintf("%s/getProfileInfo", server.URL)
-    getPersonalStatUrl = fmt.Sprintf("%s/getPersonalStat", server.URL)
-    getAverageBMIUrl = fmt.Sprintf("%s/getAverageBMI", server.URL)
+    	registerUrl = fmt.Sprintf("%s/register", server.URL)
+    	getProfileInfoUrl = fmt.Sprintf("%s/getProfileInfo", server.URL)
+	getPersonalStatUrl = fmt.Sprintf("%s/getPersonalStat", server.URL)
+    	getAverageBMIUrl = fmt.Sprintf("%s/getAverageBMI", server.URL)
 }
 
 func TestLoginHandler(t *testing.T){
 	log.Println("TestLoginHandler");
 
  	data := url.Values{}
-    data.Set("name", "test")
-    data.Add("password", "test")
+    	data.Set("name", "test")
+    	data.Add("password", "test")
 
 	request, err := http.NewRequest("POST", loginUrl, bytes.NewBufferString(data.Encode()))
 
  	request.Header.Add("Content-Type", "application/x-www-form-urlencoded")
-    request.Header.Add("Content-Length", strconv.Itoa(len(data.Encode())))
+    	request.Header.Add("Content-Length", strconv.Itoa(len(data.Encode())))
 	res, err := http.DefaultClient.Do(request)
 
 	if err != nil {
